@@ -2,24 +2,27 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
+    // Fecha que actúa como hoy: las salidas completadas quedan antes y las abiertas después.
+    public const REFERENCE_DATE = '2026-10-20';
 
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        fake()->seed(2026);
+        fake()->unique(true);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            ZoneSeeder::class,
+            ThemeSeeder::class,
+            UserSeeder::class,
+            GuideSeeder::class,
+            TrailSeeder::class,
+            ActivitySeeder::class,
+            DepartureSeeder::class,
+            BookingSeeder::class,
         ]);
     }
 }
